@@ -1,0 +1,20 @@
+diff a/android_lot/app/src/main/AndroidManifest.xml b/android_lot/app/src/main/AndroidManifest.xml	(rejected hunks)
+@@ -10,11 +10,18 @@
+         android:supportsRtl="true"
+         android:theme="@style/AppTheme">
+         <activity android:name=".view.MainActivity">
++
++        </activity>
++        <activity android:name=".view.MapActivity">
++
++        </activity>
++        <activity android:name=".view.SearchActivity">
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
++
+         </activity>
+     </application>
+ 
