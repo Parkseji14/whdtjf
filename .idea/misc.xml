@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-<<<<<<< HEAD
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-=======
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" default="true" />
   <component name="masterDetails">
     <states>
@@ -23,6 +16,5 @@
         </settings>
       </state>
     </states>
->>>>>>> 4b6489e69fcf613566bc20aee3a05e1a3b94b4c4
   </component>
 </project>
