@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Intent intent = new Intent(MainActivity.this, MapActivity.class);
                         startActivity(intent);
+
                         //overridePendingTransition(R.anim.enter_no_anim, R.anim.exit_no_anim);
                         finish();
                     } else {

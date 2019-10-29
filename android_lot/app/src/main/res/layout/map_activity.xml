@@ -1,39 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
->
+              style="@style/layout_match_vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-
         <Button
             android:id="@+id/map"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
+            style="@style/bar_button"
             android:text="map"/>
 
         <Button
             android:id="@+id/myzone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
+            style="@style/bar_button"
             android:text="myzone"/>
 
         <Button
             android:id="@+id/search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20dp"
+            style="@style/bar_button"
             android:text="search"/>
-
-
 
     </LinearLayout>
 

@@ -15,10 +15,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.utils.GetLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -29,6 +32,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -52,6 +56,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
+
+    Button search;
+    Button map;
+    Button myzone;
 
     private GoogleApiClient mGoogleApiClient = null;
     private GoogleMap mGoogleMap = null;
@@ -82,7 +90,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.map_activity);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
-                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+               WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 
         Log.d(TAG, "onCreate");
@@ -101,8 +109,28 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
 
 
+        /* 상단 바 */
+        search = (Button) findViewById(R.id.search);
+        map = (Button) findViewById(R.id.map);
+        myzone = (Button) findViewById(R.id.myzone);
 
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, SearchActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
+        myzone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, MyzoneActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -134,7 +162,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             Log.d(TAG, "startLocationUpdates : call showDialogForLocationServiceSetting");
             showDialogForLocationServiceSetting();
-        }else {
+        } else {
 
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                     && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -157,7 +185,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     private void stopLocationUpdates() {
 
-        Log.d(TAG,"stopLocationUpdates : LocationServices.FusedLocationApi.removeLocationUpdates");
+        Log.d(TAG, "stopLocationUpdates : LocationServices.FusedLocationApi.removeLocationUpdates");
         LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         mRequestingLocationUpdates = false;
     }
@@ -177,12 +205,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         //mGoogleMap.getUiSettings().setZoomControlsEnabled(false);
         mGoogleMap.getUiSettings().setMyLocationButtonEnabled(true);
         mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        mGoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener(){
+        mGoogleMap.setOnMyLocationButtonClickListener(new GoogleMap.OnMyLocationButtonClickListener() {
 
             @Override
             public boolean onMyLocationButtonClick() {
 
-                Log.d( TAG, "onMyLocationButtonClick : 위치에 따른 카메라 이동 활성화");
+                Log.d(TAG, "onMyLocationButtonClick : 위치에 따른 카메라 이동 활성화");
                 mMoveMapByAPI = true;
                 return true;
             }
@@ -192,7 +220,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onMapClick(LatLng latLng) {
 
-                Log.d( TAG, "onMapClick :");
+                Log.d(TAG, "onMapClick :");
 
 
             }
@@ -203,7 +231,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             @Override
             public void onCameraMoveStarted(int i) {
 
-                if (mMoveMapByUser == true && mRequestingLocationUpdates){
+                if (mMoveMapByUser == true && mRequestingLocationUpdates) {
 
                     Log.d(TAG, "onCameraMove : 위치에 따른 카메라 이동 비활성화");
                     mMoveMapByAPI = false;
@@ -227,9 +255,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onLocationChanged(Location location) {
-        currentPosition
-                = new LatLng( location.getLatitude(), location.getLongitude());
 
+        currentPosition
+                = new LatLng(location.getLatitude(), location.getLongitude());
 
         Log.d(TAG, "onLocationChanged : ");
 
@@ -246,7 +274,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     protected void onStart() {
 
-        if(mGoogleApiClient != null && mGoogleApiClient.isConnected() == false){
+        if (mGoogleApiClient != null && mGoogleApiClient.isConnected() == false) {
 
             Log.d(TAG, "onStart: mGoogleApiClient connect");
             mGoogleApiClient.connect();
@@ -264,7 +292,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             stopLocationUpdates();
         }
 
-        if ( mGoogleApiClient.isConnected()) {
+        if (mGoogleApiClient.isConnected()) {
 
             Log.d(TAG, "onStop : mGoogleApiClient disconnect");
             mGoogleApiClient.disconnect();
@@ -274,11 +302,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     }
 
 
-
     @Override
     public void onConnected(Bundle bundle) {
 
-        if ( mRequestingLocationUpdates == false ) {
+        if (mRequestingLocationUpdates == false) {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -299,7 +326,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     mGoogleMap.setMyLocationEnabled(true);
                 }
 
-            }else{
+            } else {
 
                 Log.d(TAG, "onConnected : call startLocationUpdates");
                 startLocationUpdates();
@@ -370,9 +397,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         if (currentMarker != null) currentMarker.remove();
 
-
+/*
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-
+*/
+        LatLng currentLatLng = new LatLng(37.322059, 127.126729);
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(currentLatLng);
         markerOptions.title(markerTitle);
@@ -383,10 +411,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         currentMarker = mGoogleMap.addMarker(markerOptions);
 
 
-        if ( mMoveMapByAPI ) {
+        if (mMoveMapByAPI) {
 
-            Log.d( TAG, "setCurrentLocation :  mGoogleMap moveCamera "
-                    + location.getLatitude() + " " + location.getLongitude() ) ;
+            Log.d(TAG, "setCurrentLocation :  mGoogleMap moveCamera "
+                    + location.getLatitude() + " " + location.getLongitude());
             // CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentLatLng, 15);
             CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLng(currentLatLng);
             mGoogleMap.moveCamera(cameraUpdate);
@@ -400,7 +428,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
         //디폴트 위치, Seoul
-        LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
+        GetLocation gl = new GetLocation("key");
+        LatLng DEFAULT_LOCATION = gl.getLng();
+        //LatLng DEFAULT_LOCATION = new LatLng(37.322059, 127.126729);
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
 
@@ -408,25 +438,18 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         if (currentMarker != null) currentMarker.remove();
 
         MarkerOptions markerOptions = new MarkerOptions();
-        /*
+
         markerOptions.position(DEFAULT_LOCATION);
         markerOptions.title(markerTitle);
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
         mGoogleMap.addMarker(markerOptions);
-*/
-        LatLng SEOUL = new LatLng(37.56, 126.97);
-        markerOptions.position(SEOUL);
-        markerOptions.title("서울");
-        markerOptions.snippet("한국의 수도");
-        mGoogleMap.addMarker(markerOptions);
 
         currentMarker = mGoogleMap.addMarker(markerOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
         mGoogleMap.moveCamera(cameraUpdate);
-
 
 
     }
@@ -454,7 +477,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
             Log.d(TAG, "checkPermissions : 퍼미션 가지고 있음");
 
-            if ( mGoogleApiClient.isConnected() == false) {
+            if (mGoogleApiClient.isConnected() == false) {
 
                 Log.d(TAG, "checkPermissions : 퍼미션 가지고 있음");
                 mGoogleApiClient.connect();
@@ -475,12 +498,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             if (permissionAccepted) {
 
 
-                if ( mGoogleApiClient.isConnected() == false) {
+                if (mGoogleApiClient.isConnected() == false) {
 
                     Log.d(TAG, "onRequestPermissionsResult : mGoogleApiClient connect");
                     mGoogleApiClient.connect();
                 }
-
 
 
             } else {
@@ -582,9 +604,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         Log.d(TAG, "onActivityResult : 퍼미션 가지고 있음");
 
 
-                        if ( mGoogleApiClient.isConnected() == false ) {
+                        if (mGoogleApiClient.isConnected() == false) {
 
-                            Log.d( TAG, "onActivityResult : mGoogleApiClient connect ");
+                            Log.d(TAG, "onActivityResult : mGoogleApiClient connect ");
                             mGoogleApiClient.connect();
                         }
                         return;
