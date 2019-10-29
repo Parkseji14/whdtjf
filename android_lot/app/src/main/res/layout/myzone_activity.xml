@@ -1,7 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              style="@style/layout_match_vertical"
+              >
+
+    <LinearLayout
+        style="@style/layout_wrap_horizontal"
+        >
+
+        <Button
+            android:id="@+id/map"
+            style="@style/bar_button"
+            android:text="map"/>
+
+        <Button
+            android:id="@+id/myzone"
+            style="@style/bar_button"
+            android:text="myzone"/>
+
+        <Button
+            android:id="@+id/search"
+            style="@style/bar_button"
+            android:text="search"/>
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/layout_wrap_horizontal"
+        android:layout_gravity="center">
+
+        <LinearLayout
+            style="@style/layout_wrap_vertical">
+
+            <ImageView
+                android:id="@+id/car_1"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_2"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_3"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_4"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_5"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_6"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_7"
+                style="@style/car"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/layout_wrap_vertical">
+
+            <ImageView
+                android:id="@+id/car_8"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_9"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_10"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_11"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_12"
+                style="@style/car"/>
+            <ImageView
+                android:id="@+id/car_13"
+                style="@style/car"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+
 
 </LinearLayout>
