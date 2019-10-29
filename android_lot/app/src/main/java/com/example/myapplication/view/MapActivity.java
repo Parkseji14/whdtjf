@@ -21,7 +21,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
-import com.example.myapplication.utils.GetLocation;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -428,9 +427,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
         //디폴트 위치, Seoul
-        GetLocation gl = new GetLocation("key");
-        LatLng DEFAULT_LOCATION = gl.getLng();
-        //LatLng DEFAULT_LOCATION = new LatLng(37.322059, 127.126729);
+        //GetLocation gl = new GetLocation("key");
+        //LatLng DEFAULT_LOCATION = gl.getLng();
+        LatLng DEFAULT_LOCATION = new LatLng(37.322059, 127.126729);
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
 
