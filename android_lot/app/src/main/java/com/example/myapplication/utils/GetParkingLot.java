@@ -1,6 +1,5 @@
 package com.example.myapplication.utils;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -10,21 +9,18 @@ import org.json.JSONObject;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by thswl on 2019-10-29.
+ * Created by thswl on 2019-11-02.
  */
-/* 사용자 key를 넣으면 ;myzone에 해당하는 location 을 double 형태로 json 에 담아서 보냄 */
-public class GetLocation {
-    LatLng lng;
 
-    public GetLocation(String key) {
-        login(key);
+public class GetParkingLot {
+    String Prkname;
+
+    public GetParkingLot(String prkname) {
+        Prkname = prkname;
     }
 
-    public LatLng getLng() {
-        return lng;
-    }
-
-    public void login(String key) {
+    /* 사용자가 입력한 주차장 이름이 포함된 주차장들을 모두 불러온다 */
+    public void parkinglots(String key) {
 
         String URL = "/signup";
         RequestParams params = new RequestParams();
@@ -41,13 +37,8 @@ public class GetLocation {
 
                     if (isSuccess == true) {
 
-
-                        JSONObject user = result.getJSONObject("user");
-
-                        double latitude = Double.parseDouble(user.getString("latitude"));
-                        double longitude = Double.parseDouble(user.getString("longtitude"));
-
-                        lng = new LatLng(latitude,longitude);
+                        JSONObject user = result.getJSONObject("park");
+                        /* 백엔드에서 주차장 목록을 반환 형식 ?? */
                         /*
                         uvo.setUsr_key(user.getInt("usr_key"));
                         uvo.setUsr_id(user.getString("usr_id"));
@@ -71,4 +62,3 @@ public class GetLocation {
         });
     }
 }
-

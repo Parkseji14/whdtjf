@@ -54,7 +54,7 @@ import androidx.core.content.ContextCompat;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        LocationListener {
+        LocationListener, GoogleMap.OnMarkerClickListener {
 
     Button search;
     Button map;
@@ -399,16 +399,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 /*
         LatLng currentLatLng = new LatLng(location.getLatitude(), location.getLongitude());
 */
-        LatLng currentLatLng = new LatLng(37.322059, 127.126729);
+
+        LatLng currentLatLng = new LatLng(37.322059, 127.126729);/*
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(currentLatLng);
         markerOptions.title(markerTitle);
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
 
-
         currentMarker = mGoogleMap.addMarker(markerOptions);
-
+*/
 
         if (mMoveMapByAPI) {
 
@@ -429,6 +429,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         //디폴트 위치, Seoul
         //GetLocation gl = new GetLocation("key");
         //LatLng DEFAULT_LOCATION = gl.getLng();
+
         LatLng DEFAULT_LOCATION = new LatLng(37.322059, 127.126729);
         String markerTitle = "위치정보 가져올 수 없음";
         String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
@@ -443,10 +444,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         markerOptions.snippet(markerSnippet);
         markerOptions.draggable(true);
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+
+
         mGoogleMap.addMarker(markerOptions);
-
-        currentMarker = mGoogleMap.addMarker(markerOptions);
-
+        mGoogleMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(DEFAULT_LOCATION, 15);
         mGoogleMap.moveCamera(cameraUpdate);
 
@@ -621,5 +622,17 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         Log.d(TAG, "onConnectionFailed");
         setDefaultLocation();
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+
+        Intent intent = new Intent(MapActivity.this, MyzoneActivity.class);
+        startActivity(intent);
+
+        //overridePendingTransition(R.anim.enter_no_anim, R.anim.exit_no_anim);
+        finish();
+
+        return false;
     }
 }

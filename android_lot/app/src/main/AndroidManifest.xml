@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.myapplication">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.example.myapplication">
 
     <!-- 네트워크 사용에 대한 퍼미션 -->
     <uses-permission android:name="android.permission.INTERNET" />

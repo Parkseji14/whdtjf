@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               style="@style/layout_match_vertical"
               android:background="@drawable/border"
               android:layout_margin="15dp">
@@ -31,5 +32,18 @@
         android:layout_height="1dip"
         android:background="#A52A2A"
         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_main_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintVertical_weight="9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="5dp"
+        android:scrollbarThumbVertical="@android:color/darker_gray"
+        android:scrollbars="vertical"/>
 
 </LinearLayout>
