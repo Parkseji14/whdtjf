@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.myapplication.R;
 import com.example.myapplication.utils.HttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -16,13 +18,15 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import androidx.appcompat.app.AppCompatActivity;
 import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText id, password;
+    private Button register_button;
+
     Button login;
-    Button singup;
+    Button signup;
     EditText email;
     EditText pw;
 
@@ -32,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         login = (Button) findViewById(R.id.login_submit);
-        singup = (Button) findViewById(R.id.sign_up);
+        signup = (Button) findViewById(R.id.sign_up);
         email = (EditText) findViewById(R.id.login_email);
         pw = (EditText) findViewById(R.id.login_pw);
 
