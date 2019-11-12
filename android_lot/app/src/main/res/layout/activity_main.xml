@@ -3,16 +3,20 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    style="@style/layout_match"
-                                                   tools:context=".view.MainActivity">
-
-
+                                                   tools:context=".view.MainActivity"
+    >
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/layout_match_vertical"
         android:gravity="center"
-        android:orientation="vertical"
+        android:background="@drawable/border"
+        android:layout_margin="15dp"
         >
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_directions_car_black_24dp"/>
 
         <EditText
             android:id="@+id/login_email"
@@ -35,13 +39,15 @@
             android:id="@+id/login_submit"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="login"/>
+            android:text="login"
+            android:background="#00000000"/>
 
         <Button
             android:id="@+id/sign_up"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="create Account"
+            android:background="#00000000"
             />
 
         <Button
@@ -54,13 +60,5 @@
 
 
     </LinearLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_alignParentBottom = "true"
-        android:text="call : 010xxxxxxxx"/>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

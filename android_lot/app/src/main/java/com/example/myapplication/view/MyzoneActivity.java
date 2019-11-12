@@ -163,10 +163,6 @@ MyzoneActivity extends AppCompatActivity {
                         /*
                         cars = new Cars(user.getInt("car_1"), user.getInt("car_2"),user.getInt("car_3"),user.getInt("car_4"),user.getInt("car_5"),user.getInt("car_6"),user.getInt("car_7"),user.getInt("car_8"));
 
-
-
-
-
                         uvo.setUsr_key(user.getInt("usr_key"));
                         uvo.setUsr_id(user.getString("usr_id"));
                         uvo.setUsr_name(user.getString("usr_name"));

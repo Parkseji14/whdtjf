@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              style="@style/layout_match_vertical">
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              style="@style/layout_match_vertical"
+              android:background="@drawable/border"
+              android:layout_margin="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -9,7 +12,7 @@
 
        <EditText
            android:id="@+id/search_line"
-           android:layout_width="300dp"
+           android:layout_width="270dp"
            android:layout_height="50dp"
            android:layout_marginTop="10dp"
            android:hint="insert location.."/>
@@ -29,5 +32,18 @@
         android:layout_height="1dip"
         android:background="#A52A2A"
         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_main_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintVertical_weight="9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scrollbarFadeDuration="0"
+        android:scrollbarSize="5dp"
+        android:scrollbarThumbVertical="@android:color/darker_gray"
+        android:scrollbars="vertical"/>
 
 </LinearLayout>
